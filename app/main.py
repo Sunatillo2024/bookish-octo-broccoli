@@ -10,10 +10,29 @@ from app.config import settings
 from app.pdf_processor import PDFProcessor
 from celery_app.tasks import generate_presentation_task
 
+# Pricing router import qilish
+from app.routes.pricing import router as pricing_router
+
 app = FastAPI(title=settings.APP_NAME)
+
+# Pricing router ni qo'shish
+app.include_router(pricing_router)
 
 # Mount storage directory for file downloads
 app.mount("/download", StaticFiles(directory=settings.STORAGE_PATH), name="download")
+
+@app.get("/")
+async def root():
+    """API Root endpoint"""
+    return {
+        "message": "Presentation Generator API",
+        "version": "1.0.0",
+        "endpoints": {
+            "presentations": "/api/presentations",
+            "pricing": "/api/pricing",
+            "docs": "/docs"
+        }
+    }
 
 @app.post("/api/presentations", response_model=PresentationResponse)
 async def create_presentation(request: PresentationRequest):

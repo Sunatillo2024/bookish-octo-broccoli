@@ -1,11 +1,43 @@
-# Test your FastAPI endpoints
+### 1. Barcha narx paketlarini ko'rish
+GET http://127.0.0.1:8000/api/pricing/tiers
+Accept: application/json
 
+###
+
+### 2. Har bir slide narxini ko'rish
+GET http://127.0.0.1:8000/api/pricing/per-slide
+Accept: application/json
+
+###
+
+### 3. 5 ta slide uchun narxni hisoblash
+GET http://127.0.0.1:8000/api/pricing/calculate?num_slides=5
+Accept: application/json
+
+###
+
+### 4. 10 ta slide uchun narxni hisoblash
+GET http://127.0.0.1:8000/api/pricing/calculate?num_slides=10
+Accept: application/json
+
+###
+
+### 5. 25 ta slide uchun narxni hisoblash
+GET http://127.0.0.1:8000/api/pricing/calculate?num_slides=25
+Accept: application/json
+
+###
+
+### 6. POST so'rovi bilan narxni hisoblash
+POST http://127.0.0.1:8000/api/pricing/estimate
+Content-Type: application/json
+
+{
+  "num_slides": 15
+}
+
+###
+
+### 7. Root endpoint
 GET http://127.0.0.1:8000/
 Accept: application/json
-
-###
-
-GET http://127.0.0.1:8000/hello/User
-Accept: application/json
-
-###
