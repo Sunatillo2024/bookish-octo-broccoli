@@ -10,12 +10,14 @@ from app.config import settings
 from app.pdf_processor import PDFProcessor
 from celery_app.tasks import generate_presentation_task
 
-# Pricing router import qilish
+# Routers import qilish
 from app.routes.pricing import router as pricing_router
+from app.routes.auth import router as auth_router
 
 app = FastAPI(title=settings.APP_NAME)
 
-# Pricing router ni qo'shish
+# Routers ni qo'shish
+app.include_router(auth_router)
 app.include_router(pricing_router)
 
 # Mount storage directory for file downloads

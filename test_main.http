@@ -1,36 +1,49 @@
-### 1. Barcha narx paketlarini ko'rish
+### ========================================
+### 1. LOGIN - JWT token olish
+### ========================================
+POST http://127.0.0.1:8000/api/auth/login
+Content-Type: application/json
+
+{
+  "api_key": "demo-api-key-12345"
+}
+
+### Response'dan access_token ni copy qiling va pastda ishlating
+### Misol: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+### ========================================
+### 2. PUBLIC - Barcha narx paketlari (JWT siz)
+### ========================================
 GET http://127.0.0.1:8000/api/pricing/tiers
 Accept: application/json
 
 ###
 
-### 2. Har bir slide narxini ko'rish
+### ========================================
+### 3. PUBLIC - Har bir slide narxi (JWT siz)
+### ========================================
 GET http://127.0.0.1:8000/api/pricing/per-slide
 Accept: application/json
 
 ###
 
-### 3. 5 ta slide uchun narxni hisoblash
-GET http://127.0.0.1:8000/api/pricing/calculate?num_slides=5
-Accept: application/json
-
-###
-
-### 4. 10 ta slide uchun narxni hisoblash
+### ========================================
+### 4. PROTECTED - Narx hisoblash (JWT bilan)
+### ========================================
 GET http://127.0.0.1:8000/api/pricing/calculate?num_slides=10
 Accept: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### YOUR_TOKEN_HERE ni yuqoridagi login response'dan olgan token bilan almashtiring
 
 ###
 
-### 5. 25 ta slide uchun narxni hisoblash
-GET http://127.0.0.1:8000/api/pricing/calculate?num_slides=25
-Accept: application/json
-
-###
-
-### 6. POST so'rovi bilan narxni hisoblash
+### ========================================
+### 5. PROTECTED - POST bilan narx hisoblash (JWT bilan)
+### ========================================
 POST http://127.0.0.1:8000/api/pricing/estimate
 Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
 
 {
   "num_slides": 15
@@ -38,6 +51,44 @@ Content-Type: application/json
 
 ###
 
-### 7. Root endpoint
-GET http://127.0.0.1:8000/
+### ========================================
+### 6. API KEY - Header bilan narx hisoblash
+### ========================================
+GET http://127.0.0.1:8000/api/pricing/calculate-with-key?num_slides=10
 Accept: application/json
+X-API-Key: demo-api-key-12345
+
+###
+
+### ========================================
+### 7. XATO - JWT siz protected endpoint
+### ========================================
+GET http://127.0.0.1:8000/api/pricing/calculate?num_slides=10
+Accept: application/json
+
+### Bu 401 Unauthorized qaytarishi kerak
+
+###
+
+### ========================================
+### 8. XATO - Noto'g'ri API key
+### ========================================
+POST http://127.0.0.1:8000/api/auth/login
+Content-Type: application/json
+
+{
+  "api_key": "wrong-api-key"
+}
+
+### Bu 401 Unauthorized qaytarishi kerak
+
+###
+
+### ========================================
+### 9. Token yaroqliligini tekshirish
+### ========================================
+GET http://127.0.0.1:8000/api/auth/verify
+Accept: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+###
