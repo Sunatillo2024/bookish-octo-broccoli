@@ -1,0 +1,77 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+.env
+venv/
+ENV/
+
+# Jupyter / IPython
+.ipynb_checkpoints
+*.ipynb
+
+# --- FastAPI / Django / Flask ---
+*.log
+*.sqlite3
+*.db
+
+# --- PowerPoint & Word generated files ---
+/storage/*.pptx
+/storage/*.docx
+/storage/*.pdf
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- IDE / Editors ---
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# --- Environment variables ---
+.env
+.env.*
+.envrc
+
+# --- Docker ---
+*.pid
+*.seed
+*.pid.lock
+docker-compose.override.yml
+# Build artifacts
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# --- Cache ---
+.cache/
+pytest_cache/
+coverage.xml
+htmlcov/
+.tox/
+.mypy_cache/
+.pytest_cache/
+
+# --- Redis dump ---
+dump.rdb
+
+# --- Temporary / backup files ---
+*.bak
+*.swp
+*.tmp
+*.old
+*~
+
+# --- Reports / AI-generated data ---
+/reports/
+.ai_temp/
+
+.qodo/
+.qodo/*xml
